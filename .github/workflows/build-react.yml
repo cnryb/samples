@@ -24,8 +24,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-      
-      - run: cd ./demos/hello-react  
-      - run: npm install
-      - run: npm run build 
+      - name: build
+        run: |
+              cd ./demos/hello-react
+              npm install
+              npm run build 
         
