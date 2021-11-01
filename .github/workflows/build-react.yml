@@ -1,0 +1,32 @@
+
+name: Build react
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-10.15
+    strategy:
+      matrix:
+        node: [ '12', '14', '16', '17' ]
+        
+    name: Node ${{ matrix.node }} build
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - name: build
+        run: |
+              cd ./demos/hello-react
+              npm install
+              npm run build 
+        
